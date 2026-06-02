@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geprek Sultan</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <div class="nav-logo">🔥 GEPREK <span>SULTAN</span></div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#hero">Beranda</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#keranjang">Keranjang</a></li>
+        <li><a href="#checkout">Pesan</a></li>
+        <li><a href="#tentang">Tentang</a></li>
+      </ul>
+      <div style="display:flex;gap:10px;align-items:center;">
+        <button class="nav-cart-btn" onclick="document.getElementById('keranjang').scrollIntoView({behavior:'smooth'})">
+          🛒 <span>Keranjang</span>
+          <span id="cart-badge">0</span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<section id="hero">
+  <div class="hero-pattern"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge">🔥 No.1 Ayam Geprek di Kota</div>
+        <h1 class="hero-title">
+          Geprek <span class="highlight">Pedas</span><br>
+          Bikin Nagih!
+        </h1>
+        <p class="hero-desc">
+          Ayam crispy renyah, sambal segar diulek langsung di depanmu. 
+          Pilih level pedas sesuai tantanganmu — dari yang lembut hingga yang bikin nangis!
+        </p>
+        <div class="hero-cta">
+          <a href="#menu" class="btn btn-primary">🍗 Lihat Menu</a>
+          <a href="#tentang" class="btn btn-outline">📍 Info Toko</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><span class="stat-num">500+</span><span class="stat-label">Pelanggan Puas</span></div>
+          <div class="stat"><span class="stat-num">4.9★</span><span class="stat-label">Rating Google</span></div>
+          <div class="stat"><span class="stat-num">5</span><span class="stat-label">Level Pedas</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-image">
+          <img src="foto1.jpeg" alt="Ayam Geprek" class="hero-img">
+        </div>
+        <div class="hero-sticker sticker-1">Crispy & Juicy!</div>
+        <div class="hero-sticker sticker-2">Level 5 = 🔥🔥🔥</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== MENU SECTION ==================== -->
+<section id="menu">
+  <div class="container">
+    <h2 class="section-title">🍽️ Menu Andalan</h2>
+    <p class="section-sub">Semua dimasak segar, disajikan panas-panas!</p>
+    <div class="menu-grid" id="menu-grid">
+      <!-- Cards di-render oleh JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ==================== KERANJANG SECTION ==================== -->
+<section id="keranjang">
+  <div class="container">
+    <h2 class="section-title">🛒 Keranjang Belanja</h2>
+    <p class="section-sub">Cek kembali pesananmu sebelum checkout</p>
+    <div class="cart-layout">
+
+      <!-- LEFT: daftar item -->
+      <div>
+        <div class="cart-box">
+          <div class="cart-box-title">🧾 Item Pesanan</div>
+          <div id="cart-items-list">
+            <div class="cart-empty">Keranjang masih kosong 😢<br>Yuk pilih menu dulu!</div>
+          </div>
+        </div>
+
+        <!-- Delivery options -->
+        <div class="cart-box" style="margin-top:20px;">
+          <div class="cart-box-title">🚗 Pilihan Layanan</div>
+          <div class="delivery-opts">
+            <label id="lbl-pickup" class="selected">
+              <input type="radio" name="delivery" value="pickup" checked onchange="updateDelivery(this)">
+              <div>
+                <div class="do-title">🏪 Ambil di Tempat</div>
+                <div class="do-sub">Biaya Antar: Gratis</div>
+              </div>
+            </label>
+            <label id="lbl-delivery">
+              <input type="radio" name="delivery" value="delivery" onchange="updateDelivery(this)">
+              <div>
+                <div class="do-title">🛵 Delivery / Antar ke Rumah</div>
+                <div class="do-sub">+Rp 5.000 biaya antar</div>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: totals -->
+      <div>
+        <div class="cart-box">
+          <div class="cart-box-title">💰 Rincian Harga</div>
+          <div class="totals-box">
+            <div class="total-row"><span>Subtotal</span><span id="subtotal-val">Rp 0</span></div>
+            <div class="total-row"><span>Biaya Antar</span><span id="delivery-fee-val">Rp 0</span></div>
+            <div class="total-row final"><span>TOTAL</span><span id="total-val">Rp 0</span></div>
+          </div>
+          <a href="#checkout">
+            <button class="btn btn-primary" style="width:100%;margin-top:20px;justify-content:center;">
+              Lanjut Checkout →
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CHECKOUT SECTION ==================== -->
+<section id="checkout">
+  <div class="container">
+    <h2 class="section-title">📝 Konfirmasi Pesanan</h2>
+    <p class="section-sub">Isi data berikut, lalu kirim via WhatsApp!</p>
+    <div class="checkout-box fade-in">
+      <div class="form-group">
+        <label>👤 Nama Pelanggan *</label>
+        <input type="text" id="cust-name" placeholder="Nama lengkapmu...">
+      </div>
+      <div class="form-group">
+        <label>📱 Nomor WhatsApp *</label>
+        <input type="tel" id="cust-wa" placeholder="08xxxxxxxxxx">
+      </div>
+      <div class="form-group" id="address-group">
+        <label>📍 Alamat Lengkap *</label>
+        <textarea id="cust-address" placeholder="Jl. ... No. ... (lengkap dengan patokan)"></textarea>
+      </div>
+      <div class="form-group">
+        <label>💳 Metode Pembayaran *</label>
+        <div class="pay-opts" id="pay-opts">
+          <label class="pay-opt selected" onclick="selectPay(this)">
+            <input type="radio" name="payment" value="Transfer Bank (BCA/Mandiri)" checked>
+            <span class="pay-icon">🏦</span>
+            Transfer Bank
+          </label>
+          <label class="pay-opt" onclick="selectPay(this)">
+            <input type="radio" name="payment" value="E-Wallet (DANA/GoPay)">
+            <span class="pay-icon">📲</span>
+            E-Wallet
+          </label>
+          <label class="pay-opt" onclick="selectPay(this)">
+            <input type="radio" name="payment" value="COD (Bayar di Tempat)">
+            <span class="pay-icon">💵</span>
+            COD
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>📝 Catatan (opsional)</label>
+        <input type="text" id="cust-note" placeholder="Misal: tidak pakai bawang, dll.">
+      </div>
+      <button class="wa-btn" onclick="konfirmasiPesanan()">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Konfirmasi Pesanan via WhatsApp
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== TENTANG KAMI ==================== -->
+<section id="tentang">
+  <div class="container">
+    <h2 class="section-title fade-in">🏪 Tentang Geprek Sultan</h2>
+    <p class="section-sub fade-in">Kami hadir untuk mengobati kerinduan akan sambal yang benar-benar pedas!</p>
+    <div class="about-grid">
+      <div class="about-card fade-in">
+        <div class="about-icon">⏰</div>
+        <h3>Jam Operasional</h3>
+        <p>Senin – Sabtu<br><strong style="color:#fff">10.00 – 21.00 WIB</strong><br><br>Minggu<br><strong style="color:#fff">10.00 – 20.00 WIB</strong></p>
+      </div>
+      <div class="about-card fade-in">
+        <div class="about-icon">📍</div>
+        <h3>Lokasi</h3>
+        <p>Jl. Raya Kuliner No. 88<br>Kel. Lezatos, Kec. Nikmat<br>Kota Geprekindo<br><br><a href="https://maps.google.com" target="_blank" style="color:var(--yellow)">📌 Buka di Google Maps</a></p>
+      </div>
+      <div class="about-card fade-in">
+        <div class="about-icon">📞</div>
+        <h3>Hubungi Kami</h3>
+        <p>WhatsApp Admin:<br><strong style="color:#fff">0812-3456-7890</strong><br><br>Instagram:<br><a href="#" style="color:var(--yellow)">@geprek_sultan</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-logo">🔥 GEPREK SULTAN</div>
+    <span>|</span>
+    <span>Made with ❤️ untuk para pecinta pedas</span>
+  </div>
+  <p>© 2025 Geprek Sultan. Semua menu dimasak segar setiap hari.</p>
+</footer>
+
+<!-- ==================== TOAST ==================== -->
+<div class="toast" id="toast">✅ Ditambahkan ke keranjang!</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
